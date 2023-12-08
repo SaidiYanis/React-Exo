@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './Header';
+import BestProducts from './bestproducts';
+import LatestProducts from './lastestproducts';
+import Footer from './footer';
+import { products } from './products'; 
+
+const bestProduct = products.reduce((prev, current) => (prev.rating > current.rating) ? prev : current); 
+const latestProducts = products.filter(p => p.isPublished).slice(-5); 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <BestProducts bestProduct={bestProduct} />
+      <LatestProducts products={latestProducts} />
+      <Footer />
     </div>
   );
 }
